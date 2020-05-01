@@ -1,8 +1,9 @@
-; Filename: ass1.nasm
-; Author:   Elham AlShehri
-;
-;
-; Purpose: Bind TCP Shellcode
+;Architecture    : x86
+;OS              : Linux
+;Author          : Elham AlShehri
+;ID              : SLAE-1538
+;Shellcode Size  : 141 bytes
+;Description     : An example of bind TCP shellcode, and executing /bin/sh.
 
 global _start			
 

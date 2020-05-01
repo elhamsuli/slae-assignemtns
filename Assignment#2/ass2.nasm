@@ -1,8 +1,9 @@
-; Filename: ass2.nasm
-; Author:   Elham AlShehri
-;
-;
-; Purpose: Reverse TCP Shellcode
+;Architecture    : x86
+;OS              : Linux
+;Author          : Elham AlShehri
+;ID              : SLAE-1538
+;Shellcode Size  : 110 bytes
+;Description     : An example of reverse TCP shellcode, and executing /bin/sh.
 
 global _start			
 

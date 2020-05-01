@@ -1,6 +1,14 @@
-// Filename: shellcode.c
-// Author:   Elham AlShehri
-// Purpose:  Execute Bind TCP Shellcode
+/*
+Architecture    : x86
+OS              : Linux
+Author          : Elham AlShehri
+ID              : SLAE-1538
+Shellcode Size  : 141 bytes
+Description     : An example of bind TCP shellcode, and executing /bin/sh.
+
+Test Using:
+        gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
+*/
 #include<stdio.h>
 #include<string.h>
 
