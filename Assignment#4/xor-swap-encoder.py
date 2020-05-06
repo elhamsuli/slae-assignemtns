@@ -2,7 +2,7 @@
 
 '''
 Author          : Elham AlShehri 
-Website		: https://medium.com/@inspiratii0n
+Website         : https://medium.com/@0x4553
 
 Description     : xor-swap-encoder
 

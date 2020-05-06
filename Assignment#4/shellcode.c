@@ -2,7 +2,7 @@
 Tested on       : Linux/x86
 Author          : Elham AlShehri
 ID              : SLAE-1538
-Shellcode Size  : 58 bytes
+Shellcode Size  : 60 bytes
 Description     : xor-swap encoded shellcode 
 
 Test Using:
