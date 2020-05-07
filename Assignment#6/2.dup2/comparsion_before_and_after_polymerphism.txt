@@ -1,0 +1,26 @@
+; change 1 --------------
+xor	ecx,ecx                         xor	ecx,ecx     ; ecx = 0
+                                    mul	ecx         ; eax = 0
+                                    mov	cl, 3       ; ecx = 3
+;------------------------
+
+; change 2 --------------
+push	esi                         mov	ebx, esi    ; ebx = esi 
+pop	ebx
+;------------------------
+
+loop:
+
+; change 3 --------------
+push	0x3f                        mov	al, 0x3f
+pop	eax
+;------------------------
+
+int	0x80
+
+
+; change 4 --------------
+inc	ecx                              loop loop      ; loop will dec ecx automatically
+cmp	cl,0x3                         
+jne	loop
+;------------------------
